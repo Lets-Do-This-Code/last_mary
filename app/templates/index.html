@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block content %}
+<center>
+<p>	Enter A Movie </p>
+
+<input onkeyup="getanswer(document.getElementById('qurybox').value)" id="qurybox"> <div id="answer"></div> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+</script> 
+<script> var data;
+function getanswer(q){
+$.get("https://www.omdbapi.com/?s="+q+"&apikey=ba1f4581", function(rawdata){
+var rawstring =JSON.stringify(rawdata);
+data =JSON.parse(rawstring);
+var title = data.Search[0].Title;
+var year = data.Search[0].Year; 
+var imdburl="https://www.imdb.com/title/"+data.Search[0].imdbID+"/";
+
+var posterurl =data.Search[0].Poster;
+document.getElementById('answer').innerHTML="<h1>"+title+"</h1><br><center> 
+<img src= '"+posterurl+"'><br><p> Year Released:"+year+"</p> <br> <p> IMDB page:
+ <a href='"+imdburl+"'target='_blank'>"+imdburl+"</a></p>"; }); }</script>
+
+
+<form method="post" action="//submit.form" onSubmit="return validateForm();">
+<div style="max-width: 400px;">
+</div>
+<div style="padding-bottom: 18px;font-size : 24px;">Moive Review</div>
+
+
+<div style="padding-bottom: 18px;">Rate this moive<span style="color: red;"> *</span><br/>
+<select id="data_4" name="data_4" style="max-width : 150px;" class="form-control"><option>1</option>
+<option>2</option>
+<option>3</option>
+<option>4</option>
+<option>5</option>
+</select>
+</div>
+
+
+<div style="padding-bottom: 18px;">Review<span style="color: red;"> *</span><br/>
+<textarea id="data_8" false name="data_8" style="max-width : 450px;" rows="9" class="form-control"></textarea>
+</div>
+
+
+<div style="padding-bottom: 18px;"><input name="skip_Submit" value="Submit" type="submit"/></div>
+
+
+<div style="float:right"><a href="https://www.100forms.com" id="lnk100" title="form to email">form to email</a></div>
+
+<script src="https://www.100forms.com/js/FORMKEY:5BEXE4MELE4X/SEND:lgrioli@mybce.catholic.edu.au" type="text/javascript"></script>
+</div>
+</form>
+</center>
+
+
+<script type="text/javascript">
+function validateForm() {
+if (isEmpty(document.getElementById('data_2').value.trim())) {
+alert('Reviewer is required!');
+return false;
+}
+if (isEmpty(document.getElementById('data_5').value.trim())) {
+alert('Title is required!');
+return false;
+}
+if (isEmpty(document.getElementById('data_8').value.trim())) {
+alert('Review is required!');
+return false;
+}
+return true;
+}
+function isEmpty(str) { return (str.length === 0 || !str.trim()); }
+function validateEmail(email) {
+var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,15}(?:\.[a-z]{2})?)$/i;
+return isEmpty(email) || re.test(email);
+}
+</script>
+
+
+
+{% endblock %}
+
+
+

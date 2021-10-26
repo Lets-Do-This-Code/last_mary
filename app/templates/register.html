@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block content %}  
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<body>
+<ul class="breadcrumb">
+  <li><a href="index">Home</a></li>
+</ul>
+<center>
+    <h1>Register</h1>
+    <br>
+    <br>
+
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+ <!-- The access level section--->       
+    
+<!-- The email section--->
+<div class="container-fluid pt-3">
+<div class="w3-container"> 
+<!-- The name section--->
+        <div class = "center1">
+        <p>
+            {{ form.name.label }}<br>
+            {{ form.name(size=32) }}<br>
+            {% for error in form.name.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+    </div>
+<br>
+<!-- The passwerd section--->
+<div class = "center1">
+        <p>
+            {{ form.password.label }}<br>
+            {{ form.password(size=32) }}<br>
+            {% for error in form.password.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+    </div>
+<br>
+<div class = "center1">
+        <p>
+            {{ form.password2.label }}<br>
+            {{ form.password2(size=32) }}<br>
+            {% for error in form.password2.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+    </div>
+<!-- The email section--->
+<br>
+<div class = "center1">
+        <p>
+            {{ form.email.label }}<br>
+            {{ form.email(size=64) }}<br>
+            {% for error in form.email.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+</div>
+<br>
+
+
+
+<div class = "center1">
+        <p>
+            {{ form.datebirth.label }}<br>
+            {{ form.datebirth(size=32) }}<br>
+            {% for error in form.datebirth.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+    </div>
+
+<br>
+<div class = "center1">
+        <p>{{ form.submit() }}</p>
+</div>
+</div>
+</div>
+</form>
+    <p>All ready have an acount <a href="signin"> Sign in here </a></p>
+</center>
+{% endblock %}
